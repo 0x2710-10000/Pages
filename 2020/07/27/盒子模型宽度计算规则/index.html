@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">拉取github项目到本地进行开发 | 10000&#39;s blog</title>
+  <title itemprop="name">盒子模型宽度计算规则 | 10000&#39;s blog</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -418,11 +418,11 @@
 
   <div class="pattern-center single-center">
     <!-- 有配图默认渲染第一张 -->
-    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200726232844.webp);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200726232844.webp">
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg20200722190926.jpg);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg20200722190926.jpg">
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
-      拉取github项目到本地进行开发</h1>
+      盒子模型宽度计算规则</h1>
       <p class="entry-census">
         <span>
           <a href="blog.yione.club">
@@ -434,7 +434,7 @@
         </span>
         <span class="bull">
         ·</span>
-        2020-7-26<span class="bull">
+        2020-7-27<span class="bull">
         ·</span>
       <span id="busuanzi_value_page_pv"></span>次阅读</p>
     </header>
@@ -448,25 +448,60 @@
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本教程建立在你已经安装git并完成添加Github公匙</p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>当你想在一个新文件夹中拉取github仓库中的代码并进行同步开发时可参照本教程</p>
-<h3 id="1-关联远程仓库"><a href="#1-关联远程仓库" class="headerlink" title="1.关联远程仓库"></a>1.关联远程仓库</h3><p>使用 <code>git remote add [shortname] [url]</code> 来关联远程仓库</p>
-<p>如  git remote add origin <a href="mailto:&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#104;&#117;&#98;&#x2e;&#99;&#111;&#109;">&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#104;&#117;&#98;&#x2e;&#99;&#111;&#109;</a>:0x2710-10000/Pages.git</p>
-<p>其中 <code>shortname</code>用来指其后的仓库地址的简称</p>
-<p><code>url</code> 可以支持3种类型：(此处示例摘自<a href="https://www.runoob.com/git/git-create-repository.html" target="_blank" rel="noopener">菜鸟教程笔记</a>)</p>
-<pre><code>git@github.com:fsliurujie/test.git         --SSH协议
-git://github.com/fsliurujie/test.git          --GIT协议
-https://github.com/fsliurujie/test.git      --HTTPS协议</code></pre>
-<h3 id="2-拉取仓库对应分支的更新"><a href="#2-拉取仓库对应分支的更新" class="headerlink" title="2.拉取仓库对应分支的更新"></a>2.拉取仓库对应分支的更新</h3><p>使用 <code> git pull &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;</code> 来拉取更新</p>
-<p>如 git pull origin master:master</p>
-<p>如果远程分支master要与当前分支合并，则冒号后面可以省略,简写为:</p>
-<p><code>git pull origin master</code></p>
-<p>如果当前分支与远程分支存在追踪关系，就可以省略远程分支名:</p>
-<p><code>git pull origin</code></p>
-<p>如果当前分支只有一个追踪分支，远程主机名也可以省略：</p>
-<p><code>git pull</code></p>
-<p>所以这里如果仓库就只有一个分支使用 <code>git pull</code> 即可</p>
-<p>若有多个分支，使用 <code>git pull &lt;远程主机名&gt; &lt;远程分支名&gt;</code> 即可</p>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这几天在学习负边距的时候发现一个问题：</p>
+<p>当div(其父元素宽高为200px，未设置其他属性)宽度auto的时候，设置margin-left为负100px时，浏览器控制台中的盒子模型中with(内容宽度)变为300px，效果如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200727120442.png"></p>
+<p>HTML和css如下：</p>
+<pre><code class="html">&lt;div id=&quot;test1&quot;&gt;
+  &lt;div id=&quot;test2&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<pre><code class="css">#test1 {
+  width: 200px;
+  height: 200px;
+  background: burlywood;
+}
+#test2 {
+  width: auto;
+  margin-left: -100px;
+}</code></pre>
+<p>这与盒子模型的计算规则有关，下面将详细说一下盒子模型的计算规则</p>
+<p>以下内容均以<code>标准盒子模型</code>为准</p>
+<p>在了解计算规则之前，先了解两个名词概念</p>
+<h2 id="计算值和使用值"><a href="#计算值和使用值" class="headerlink" title="计算值和使用值"></a>计算值和使用值</h2><p><code>计算值</code> 计算值指的是属性中所定义的值，如width：100px这个值即计算值</p>
+<p><code>使用值</code> 使用值简单说就是用于渲染的值,大部分情况下使用值和计算值相同</p>
+<p>详细描述见<a href="https://www.w3.org/TR/CSS22/cascade.html#value-stages" target="_blank" rel="noopener">6.1 Specified, computed, and actual values</a></p>
+<h2 id="行内非替换元素"><a href="#行内非替换元素" class="headerlink" title="行内非替换元素"></a>行内非替换元素</h2><p>css规范中，行内非替换元素的宽度计算有如下说明：</p>
+<blockquote>
+<p>The <a href="https://www.w3.org/TR/CSS22/visudet.html#propdef-width" target="_blank" rel="noopener">‘width’</a> property does not apply. A computed value of ‘auto’ for <a href="https://www.w3.org/TR/CSS22/box.html#propdef-margin-left" target="_blank" rel="noopener">‘margin-left’</a> or <a href="https://www.w3.org/TR/CSS22/box.html#propdef-margin-right" target="_blank" rel="noopener">‘margin-right’</a> becomes a used value of ‘0’.</p>
+</blockquote>
+<p>谷歌翻译为：</p>
+<p>​    在<a href="https://www.w3.org/TR/CSS22/visudet.html#propdef-width" target="_blank" rel="noopener">“宽度”</a>属性不适用。<a href="https://www.w3.org/TR/CSS22/box.html#propdef-margin-left" target="_blank" rel="noopener">“左边距”</a>或<a href="https://www.w3.org/TR/CSS22/box.html#propdef-margin-right" target="_blank" rel="noopener">“右边</a><a href="https://www.w3.org/TR/CSS22/box.html#propdef-margin-left" target="_blank" rel="noopener">距</a> ”的“自动”计算值变为使用值“ 0”。</p>
+<p>即：</p>
+<ol>
+<li>宽度不适用，行内非替换元素的宽度由内容决定</li>
+<li>margin-left/margin-right 计算值为 auto 时 使用值为 0</li>
+</ol>
+<h2 id="行内替换元素"><a href="#行内替换元素" class="headerlink" title="行内替换元素"></a>行内替换元素</h2><ol>
+<li>margin-left/margin-right 计算值为 auto 时 使用值为0    </li>
+<li>width和height计算值都为 auto 并且元素具有固有宽度，width 值为固有宽度的值</li>
+<li>width和height计算值都为 auto 且元素没有固有宽度，但有固有高度或者指定高度且有固有比例，此时width的使用值为：高度使用值*比例</li>
+<li>width和height计算值都为auto 并且元素具有固有比率，若该元素没有固有宽高，则则CSS 2.2中未定义’width’的使用值，CSS2.2中建议如果元素的宽度本身不取决于替换元素的宽度，则 width 的使用值是根据文档流中块级非替换元素的公式计算得出的</li>
+<li>width的计算值为 auto ，并且元素具有固有宽度，则该固有宽度就是 width 的使用值</li>
+<li>width 的计算值为 auto 但不满足上述任何条件，则宽度的使用值则为300px，若300px太宽无法被设备容纳，则使用宽高比为2:1的矩形宽度来代替(此处机翻可能有误，暂未验证)</li>
+</ol>
+<h2 id="块级非替换元素"><a href="#块级非替换元素" class="headerlink" title="块级非替换元素"></a>块级非替换元素</h2><h3 id="计算公式"><a href="#计算公式" class="headerlink" title="计算公式"></a>计算公式</h3><p><code>margin-left + border-left + padding-left + width + padding-right + border-right + margin-right = 包含块(containing block)宽度</code></p>
+<ol>
+<li><p>如果border-left、padding-left、width、border-right、padding-right均不为auto，且margin-left和left有非auto计算值，则被称为<strong>为过度约束</strong>，<br> 如果direction(文本排列方向)为ltr,则margin-right属性值将被忽略，且该属性的使用值为使计算公式成立的值，如果direction(文本排列方向)为rtl则margin-left被忽略使用值同上</p>
+</li>
+<li><p>如果将width计算值为auto，则其他所有auto使用值将变为0，且<code>width = 包含块宽度(此时内容宽度为100%) - 当前所有指定值的和</code></p>
+</li>
+<li><p>当width不为auto，且margin-left和margin-right都是auto时，它们的应用值相等。此时，该元素相对于包含块边界水平居中。</p>
+</li>
+</ol>
+<p>其中第2条：当 width 计算值为 auto 时 width = 包含块宽度 - 负边距即width的使用值增加，即为上述问题的答案</p>
+<p>其中第3条<strong>是块级元素通过 margin：0 auto 水平居中的原理</strong></p>
+<p><strong>注意：margin默认值为0，所以需要手动设置auto</strong></p>
+<p>未完待续……</p>
 
         </div>
         <!-- .entry-content -->
@@ -495,36 +530,19 @@ https://github.com/fsliurujie/test.git      --HTTPS协议</code></pre>
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
-          
-            <div class="post-nepre half previous">
-          
-            <a href="/2020/07/27/盒子模型宽度计算规则/" rel="prev">
-              <div class="background">
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg20200722190926.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg20200722190926.jpg">
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                盒子模型宽度计算规则</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
         
           
-            <div class="post-nepre half next">
+            <div class="post-nepre full next">
           
-            <a href="/2020/07/23/VSCode 自定义H5 Vue 模板/" rel="next">
+            <a href="/2020/07/26/拉取github项目到本地进行开发/" rel="next">
               <div class="background">
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200723105201.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200723105201.webp">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200726232844.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200726232844.webp">
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                VSCode 自定义H5 Vue 模板</h3>
+                拉取github项目到本地进行开发</h3>
                 <hr>
               </div>
             </a>
