@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">Category: 教程 | 10000&#39;s blog</title>
+  <title itemprop="name">npm加速及设置全局安装位置 | 10000&#39;s blog</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -412,237 +412,174 @@
   </div>
 </header>
 
-      
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/tocbot/4.10.1/tocbot.css">
 <div class="pattern-center-blank"></div>
-<div class="pattern-center ">
-  <div class="pattern-attachment-img">
-    <img data-src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/banner/coding.jpg" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200807222229.webp);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200807222229.webp">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      npm加速及设置全局安装位置</h1>
+      <p class="entry-census">
+        <span>
+          <a href="blog.yione.club">
+            <img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="blog.yione.club">10000</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-8-6<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
   </div>
-  <header class="pattern-header ">
-    <h1 class="cat-title">教程</h1>
-    <span class="cat-des">
-      <p>Learn something here</p>
-    </span>
-  </header>
-</div>
+
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h2 id="1-NPM加速"><a href="#1-NPM加速" class="headerlink" title="1.NPM加速"></a>1.NPM加速</h2><p>使用 <code>npm config ls </code> 来查看当前配置</p>
+<p>可以看到 <code>metrics-registry = &quot;https://registry.npmjs.org/&quot;</code> 也就是npm默认源地址</p>
+<p>如果你在国内，使用此源可能比较慢</p>
+<h3 id="永久更改npm源"><a href="#永久更改npm源" class="headerlink" title="永久更改npm源"></a>永久更改npm源</h3><p>可以使用 <code>npm set registry 源地址</code> 来永久更改npm源</p>
+<p>这里我们使用淘宝镜像 即：<code>npm config set registry https://registry.npm.taobao.org</code></p>
+<h3 id="临时使用国内源"><a href="#临时使用国内源" class="headerlink" title="临时使用国内源"></a>临时使用国内源</h3><p>可使用 <code>--registry=原地址</code> 来临时使用新的源地址，如：<code>npm install cnpm -g --registry=http://registry.npm.taobao.org</code> 会从淘宝镜像下载安装cnpm</p>
+<p>但是每次都要输入比较麻烦，建议永久更改为国内源</p>
+<h2 id="2-更改NPM全局安装位置及缓存位置"><a href="#2-更改NPM全局安装位置及缓存位置" class="headerlink" title="2.更改NPM全局安装位置及缓存位置"></a>2.更改NPM全局安装位置及缓存位置</h2><h3 id="更改位置"><a href="#更改位置" class="headerlink" title="更改位置"></a>更改位置</h3><p>同样使用 <code>npm config ls </code> 来查看当前配置</p>
+<p>或者 </p>
+<ol>
+<li>使用 <code>npm get prefix</code> 查看全局安装位置</li>
+<li>使用 <code>npm get cache</code> 查看缓存位置</li>
+</ol>
+<p>可以看到：</p>
+<ol>
+<li>默认全局安装位置：C:\Users\用户名\AppData\Roaming\npm</li>
+<li>默认缓存位置： C:\Users\用户名\AppData\Roaming\npm-cache</li>
+</ol>
+<p>更改位置：</p>
+<ol>
+<li>使用  <code>npm set prefix 全局安装文件夹</code> 改全局安装位置</li>
+<li>使用  <code>npm set cache 缓存文件夹</code>  来更改缓存位置</li>
+</ol>
+<h3 id="更改环境变量"><a href="#更改环境变量" class="headerlink" title="更改环境变量"></a>更改环境变量</h3><p>此电脑(我的电脑) –&gt; 右键 –&gt; 属性  左侧找到高级系统设置  下方环境变量</p>
+<p>系统变量</p>
+<p>​    新建</p>
+<p>​        变量名：<code>NPM_PREFIX</code></p>
+<p>​        变量值： <code>你的npm全局安装路径</code> 如 <code>D:\Develop\nodejs\npm_global</code></p>
+<p>​    更改Path</p>
+<p>​        win7用户在后面追加  <code>;%NPM_PREFIX%</code></p>
+<p>​        win10用户直接新建写入  <code>%NPM_PREFIX%</code></p>
+<p>用户变量</p>
+<p>​    如果发现Path中有安装时自动添加的之前的npm路径，可选择直接删除或者参照系统变量设置值</p>
+<p><strong>点击确定保存即可</strong></p>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/custom/AliPay.jpg"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/custom/WeChatPay.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2020/08/07/字符串解构及扩展运算符展开字符串原理/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200808012214.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200808012214.webp">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                字符串解构及扩展运算符展开字符串原理</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2020/08/01/VSCode 自定义代码片段/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200723105201.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200723105201.webp">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                VSCode 自定义代码片段</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
       
-  <!-- 首页默认取最最新文章集 -->
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/08/01/VSCode 自定义代码片段/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200723105201.webp" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/08/01/VSCode 自定义代码片段/">
-    VSCode 自定义代码片段</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-8-1</div>
-    <p>
-    试试自定义vscode模板吧</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/08/01/VSCode 自定义代码片段/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/07/26/拉取github项目到本地进行开发/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200726232844.webp" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/07/26/拉取github项目到本地进行开发/">
-    拉取github项目到本地进行开发</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-7-26</div>
-    <p>
-    </p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/07/26/拉取github项目到本地进行开发/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/07/21/GithubPages自定义域名/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg20200722071319.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/07/21/GithubPages自定义域名/">
-    GitHub Pages 自定义域名</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-7-21</div>
-    <p>
-    用自己的域名解析到Github博客页面</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/07/21/GithubPages自定义域名/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "eBI2VrTzWQqUDHdL2H3tHKVa-gzGzoHsz",
+        appKey: "xJU20pLKjcpPzw94uWscFv8z",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
 
-
-      <div class="clearer">
-      </div>
-    </main>
-    <!--  -->
-    
-  </div>
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="blog.yione.club" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/custom/avatar.jpg" itemprop="image" alt="10000" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="blog.yione.club" itemprop="url" rel="author">10000</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i></p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
 
-<!-- 
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/08/01/VSCode 自定义代码片段/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200723105201.webp" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/08/01/VSCode 自定义代码片段/">
-    VSCode 自定义代码片段</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-8-1</div>
-    <p>
-    试试自定义vscode模板吧</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/08/01/VSCode 自定义代码片段/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/07/26/拉取github项目到本地进行开发/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200726232844.webp" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/07/26/拉取github项目到本地进行开发/">
-    拉取github项目到本地进行开发</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-7-26</div>
-    <p>
-    </p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/07/26/拉取github项目到本地进行开发/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/07/21/GithubPages自定义域名/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg20200722071319.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/07/21/GithubPages自定义域名/">
-    GitHub Pages 自定义域名</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-7-21</div>
-    <p>
-    用自己的域名解析到Github博客页面</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/07/21/GithubPages自定义域名/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
 
- -->
+
     </div>    
     <div class="ins-search">
     <div class="ins-search-mask"></div>
