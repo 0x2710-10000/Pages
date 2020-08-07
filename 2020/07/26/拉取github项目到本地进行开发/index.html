@@ -450,14 +450,16 @@
         <div class="entry-content">
           <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本教程建立在你已经安装git并完成添加Github公匙</p>
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>当你想在一个新文件夹中拉取github仓库中的代码并进行同步开发时可参照本教程</p>
-<h3 id="1-关联远程仓库"><a href="#1-关联远程仓库" class="headerlink" title="1.关联远程仓库"></a>1.关联远程仓库</h3><p>使用 <code>git remote add [shortname] [url]</code> 来关联远程仓库</p>
-<p>如  git remote add origin <a href="mailto:&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#104;&#117;&#98;&#x2e;&#99;&#111;&#109;">&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#104;&#117;&#98;&#x2e;&#99;&#111;&#109;</a>:0x2710-10000/Pages.git</p>
+<h3 id="1-初始化本地仓库"><a href="#1-初始化本地仓库" class="headerlink" title="1.初始化本地仓库"></a>1.初始化本地仓库</h3><p>使用 <code>git init</code> 命令初始化一个空的本地仓库</p>
+<h3 id="2-关联远程仓库"><a href="#2-关联远程仓库" class="headerlink" title="2.关联远程仓库"></a>2.关联远程仓库</h3><p>使用 <code>git remote add [shortname] [url]</code> 来关联远程仓库</p>
+<p>如  git remote add origin <a href="mailto:&#103;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#x68;&#x75;&#x62;&#x2e;&#99;&#x6f;&#x6d;">&#103;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#x68;&#x75;&#x62;&#x2e;&#99;&#x6f;&#x6d;</a>:0x2710-10000/Pages.git</p>
 <p>其中 <code>shortname</code>用来指其后的仓库地址的简称</p>
 <p><code>url</code> 可以支持3种类型：(此处示例摘自<a href="https://www.runoob.com/git/git-create-repository.html" target="_blank" rel="noopener">菜鸟教程笔记</a>)</p>
 <pre><code>git@github.com:fsliurujie/test.git         --SSH协议
 git://github.com/fsliurujie/test.git          --GIT协议
 https://github.com/fsliurujie/test.git      --HTTPS协议</code></pre>
-<h3 id="2-拉取仓库对应分支的更新"><a href="#2-拉取仓库对应分支的更新" class="headerlink" title="2.拉取仓库对应分支的更新"></a>2.拉取仓库对应分支的更新</h3><p>使用 <code> git pull &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;</code> 来拉取更新</p>
+<p>这里我们添加了公匙选所以择<code>ssh协议</code>地址可以不用输入密码</p>
+<h3 id="3-拉取仓库对应分支的更新"><a href="#3-拉取仓库对应分支的更新" class="headerlink" title="3.拉取仓库对应分支的更新"></a>3.拉取仓库对应分支的更新</h3><p>使用 <code> git pull &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;</code> 来拉取更新</p>
 <p>如 git pull origin master:master</p>
 <p>如果远程分支master要与当前分支合并，则冒号后面可以省略,简写为:</p>
 <p><code>git pull origin master</code></p>
@@ -516,15 +518,15 @@ https://github.com/fsliurujie/test.git      --HTTPS协议</code></pre>
           
             <div class="post-nepre half next">
           
-            <a href="/2020/07/23/VSCode 自定义H5 Vue 模板/" rel="next">
+            <a href="/2020/07/22/display inline inlineblock block 的区别/" rel="next">
               <div class="background">
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200723105201.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200723105201.webp">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg20200722190926.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg20200722190926.jpg">
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                VSCode 自定义H5 Vue 模板</h3>
+                Display inline, inline-block, block 的区别</h3>
                 <hr>
               </div>
             </a>

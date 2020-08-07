@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">Category: 教程 | 10000&#39;s blog</title>
+  <title itemprop="name">VSCode 自定义代码片段 | 10000&#39;s blog</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -412,237 +412,179 @@
   </div>
 </header>
 
-      
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/tocbot/4.10.1/tocbot.css">
 <div class="pattern-center-blank"></div>
-<div class="pattern-center ">
-  <div class="pattern-attachment-img">
-    <img data-src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/banner/coding.jpg" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200723105201.webp);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200723105201.webp">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      VSCode 自定义代码片段</h1>
+      <p class="entry-census">
+        <span>
+          <a href="http://blog.yione.club">
+            <img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="http://blog.yione.club">10000</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-8-1<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
   </div>
-  <header class="pattern-header ">
-    <h1 class="cat-title">教程</h1>
-    <span class="cat-des">
-      <p>Learn something here</p>
-    </span>
-  </header>
-</div>
+
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h2 id="1-打开-json文件"><a href="#1-打开-json文件" class="headerlink" title="1.打开.json文件"></a>1.打开.json文件</h2><p>​    文件(File)→首选项(Perferences)→用户片段(User Snippets)</p>
+<p>​    这里使用的是html 所以以自定义html代码片段为例，其他语言改成相应的json文件即可    </p>
+<p>​    在弹出的搜索框输入 html 打开html.json</p>
+<h2 id="2-自定义代码片段"><a href="#2-自定义代码片段" class="headerlink" title="2.自定义代码片段"></a>2.自定义代码片段</h2><p>​    <code>这里以自定义Vue模板为例</code></p>
+<p>​    打开html.json后在大括号中填入：</p>
+<pre><code class="json">&quot;h5 模板&quot;: { // 模板名
+  &quot;prefix&quot;: &quot;vh&quot;, // 快捷键
+  &quot;body&quot;: [ // Document 内容
+    &quot;&lt;!DOCTYPE html&gt;&quot;,
+    &quot;&lt;html lang=\&quot;zh-CN\&quot;&gt;&quot;,
+    &quot;&lt;head&gt;&quot;,
+    &quot;\t&lt;meta charset=\&quot;UTF-8\&quot;&gt;&quot;,
+    &quot;\t&lt;meta name=\&quot;viewport\&quot; content=\&quot;width=device-width, initial-scale=1.0\&quot;&gt;&quot;,
+    &quot;\t&lt;title&gt;Document&lt;/title&gt;&quot;,
+    &quot;\t&lt;script src=\&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js\&quot;&gt;&lt;/script&gt;&quot;,
+    &quot;&lt;/head&gt;&quot;,
+    &quot;&lt;body&gt;&quot;,
+    &quot;\t&lt;div id =\&quot;app\&quot;&gt;$1&lt;/div&gt;\n&quot;,
+    &quot;\t&lt;script&gt;&quot;,
+    &quot;\t//创建Vue实例,得到 ViewModel&quot;,
+    &quot;\tvar vm = new Vue({&quot;,
+    &quot;\t\tel: &#39;#app&#39;,&quot;,
+    &quot;\t\tdata: {},&quot;,
+    &quot;\t\tmethods: {}&quot;,
+    &quot;\t});&quot;,
+    &quot;\t&lt;/script&gt;&quot;,
+    &quot;&lt;/body&gt;&quot;,
+    &quot;&lt;/html&gt;&quot;
+  ],
+  &quot;description&quot;: &quot;vue html5 模板&quot; // 描述
+}</code></pre>
+<p><strong>注意：自定义时注意转义字符</strong></p>
+<h2 id="3-使用方法"><a href="#3-使用方法" class="headerlink" title="3.使用方法"></a>3.使用方法</h2><p>​    创建html文件后，输入快捷，键按<code>Tab</code>或 <code>Enter</code> 即可</p>
+<h2 id="4-Snippet语法"><a href="#4-Snippet语法" class="headerlink" title="4.Snippet语法"></a>4.Snippet语法</h2><h3 id="制表位-Tabstops"><a href="#制表位-Tabstops" class="headerlink" title="制表位(Tabstops)"></a>制表位(Tabstops)</h3><p>使用制表位可在代码片段中使用 <code>Tab</code> 键移动光标位置，使用$number如$1, $2 等代指光标位置，其中后面的数字表示光标的移动顺序，<code>$0表示光标的最终位置</code>，如果代码片段中有多个相同的制表位(如两个$1) 则编译器会同时出现多个光标</p>
+<h3 id="占位符-Placeholders"><a href="#占位符-Placeholders" class="headerlink" title="占位符(Placeholders)"></a>占位符(Placeholders)</h3><p>占位符是带默认值的制表位，占位符中的文本会被插入到制表位中，并全选以方便修改</p>
+<p>例：<code>&lt;div id=&#39;${1:app}&#39;&gt;&lt;/div&gt;</code></p>
+<h3 id="选择项-Choice"><a href="#选择项-Choice" class="headerlink" title="选择项(Choice)"></a>选择项(Choice)</h3><p>占位符可以有多个选择项，默认使用第一个，输入时弹出选择项可供用户选择，选项的开始和结束使用 <code>|</code> 符号，其中选择项使用  <code>,</code> 分隔，如：<code>${1|one,two,three|}</code> </p>
+<p>以上是Snippet部分语法</p>
+<p>参考自 <a href="https://segmentfault.com/a/1190000018457312" target="_blank" rel="noopener">vscode 自定义代码片段</a></p>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/custom/AliPay.jpg"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/custom/WeChatPay.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2020/08/06/npm加速及设置全局安装位置/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200807222229.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200807222229.webp">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                npm加速及设置全局安装位置</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2020/07/27/盒子模型宽度计算规则/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg20200722190926.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg20200722190926.jpg">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                盒子模型宽度计算规则</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
       
-  <!-- 首页默认取最最新文章集 -->
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/08/01/VSCode 自定义代码片段/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200723105201.webp" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/08/01/VSCode 自定义代码片段/">
-    VSCode 自定义代码片段</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-8-1</div>
-    <p>
-    试试自定义vscode模板吧</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/08/01/VSCode 自定义代码片段/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/07/26/拉取github项目到本地进行开发/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200726232844.webp" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/07/26/拉取github项目到本地进行开发/">
-    拉取github项目到本地进行开发</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-7-26</div>
-    <p>
-    </p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/07/26/拉取github项目到本地进行开发/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/07/21/GithubPages自定义域名/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg20200722071319.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/07/21/GithubPages自定义域名/">
-    GitHub Pages 自定义域名</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-7-21</div>
-    <p>
-    用自己的域名解析到Github博客页面</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/07/21/GithubPages自定义域名/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "eBI2VrTzWQqUDHdL2H3tHKVa-gzGzoHsz",
+        appKey: "xJU20pLKjcpPzw94uWscFv8z",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
 
-
-      <div class="clearer">
-      </div>
-    </main>
-    <!--  -->
-    
-  </div>
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="http://blog.yione.club" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/custom/avatar.jpg" itemprop="image" alt="10000" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="http://blog.yione.club" itemprop="url" rel="author">10000</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i></p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
 
-<!-- 
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/08/01/VSCode 自定义代码片段/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200723105201.webp" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/08/01/VSCode 自定义代码片段/">
-    VSCode 自定义代码片段</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-8-1</div>
-    <p>
-    试试自定义vscode模板吧</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/08/01/VSCode 自定义代码片段/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/07/26/拉取github项目到本地进行开发/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200726232844.webp" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/07/26/拉取github项目到本地进行开发/">
-    拉取github项目到本地进行开发</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-7-26</div>
-    <p>
-    </p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/07/26/拉取github项目到本地进行开发/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/07/21/GithubPages自定义域名/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg20200722071319.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/07/21/GithubPages自定义域名/">
-    GitHub Pages 自定义域名</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-7-21</div>
-    <p>
-    用自己的域名解析到Github博客页面</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/07/21/GithubPages自定义域名/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
 
- -->
+
     </div>    
     <div class="ins-search">
     <div class="ins-search-mask"></div>
