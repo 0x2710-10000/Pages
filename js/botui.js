@@ -24,30 +24,36 @@ function bot_ui_ini() {
         delay: 800,
         content: "Hi, there👋"
     }).then(function () {
-        botui.message.add({
+        return botui.message.add({
             delay: 1100,
             content: "这里是 0x2710"
-        }).then(function () {
-            botui.message.add({
-                delay: 1100,
-                content: "一个前端菜鸟"
-            }).then(function () {
-                botui.action.button({
-                    delay: 1600,
-                    action: [{
-                        text: "然后呢？ 😃",
-                        value: "sure"
-                    }, {
-                        text: "少废话！ 🙄",
-                        value: "skip"
-                    }]
-                }).then(function (a) {
-                    "sure" == a.value && sure();
-                    "skip" == a.value && end()
-                })
-            })
         })
+    }).then(function () {
+        return botui.message.add({
+            delay: 1100,
+            content: "一个前端菜鸟"
+        })
+    }).then(function () {
+        return botui.action.button({
+            delay: 1600,
+            action: [{
+                text: "然后呢？ 😃",
+                value: "sure"
+            }, {
+                text: "少废话！ 🙄",
+                value: "skip"
+            }]
+        })
+    }).then(function (a) {
+        "sure" == a.value && sure();
+        "skip" == a.value && end()
     });
+    var end = function () {
+        botui.message.add({
+            delay: 600,
+            content: "![...](https://view.moezx.cc/images/2018/05/06/a1c4cd0452528b572af37952489372b6.md.jpg)"
+        })
+    }
     var sure = function () {
             botui.message.add({
                 delay: 600,
@@ -58,12 +64,6 @@ function bot_ui_ini() {
                     delay: 600,
                     content: "然后网站建设中，有啥内容以后想到再补吧"
                 })
-            })
-        },
-        end = function () {
-            botui.message.add({
-                delay: 600,
-                content: "![...](https://view.moezx.cc/images/2018/05/06/a1c4cd0452528b572af37952489372b6.md.jpg)"
             })
         },
         secondpart = function () {
