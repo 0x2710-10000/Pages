@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2020-08-14T09:05:13.807Z</updated>
+  <updated>2020-08-15T08:31:57.210Z</updated>
   <id>/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JS中new干了什么？</title>
+    <link href="/2020/08/15/js%E4%B8%ADnew%E5%B9%B2%E4%BA%86%E4%BB%80%E4%B9%88/"/>
+    <id>/2020/08/15/js中new干了什么/</id>
+    <published>2020-08-15T06:50:43.000Z</published>
+    <updated>2020-08-15T08:31:57.210Z</updated>
+    
+    <summary type="html">
+    
+      js中new具体干了啥？
+    
+    </summary>
+    
+      <category term="笔记" scheme="/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="JavaScript" scheme="/tags/JavaScript/"/>
+    
+  </entry>
   
   <entry>
     <title>VSCode修改默认HTML模板</title>
@@ -52,9 +72,9 @@
       <category term="笔记" scheme="/categories/%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="ES6" scheme="/tags/ES6/"/>
-    
       <category term="JavaScript" scheme="/tags/JavaScript/"/>
+    
+      <category term="ES6" scheme="/tags/ES6/"/>
     
   </entry>
   
