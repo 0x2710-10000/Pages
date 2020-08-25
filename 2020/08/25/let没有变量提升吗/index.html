@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">字符串解构及扩展运算符展开字符串原理 | 10000&#39;s blog</title>
+  <title itemprop="name">let没有变量提升吗 | 10000&#39;s blog</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -416,30 +416,6 @@
 <link rel="stylesheet" href="https://cdn.bootcss.com/tocbot/4.10.1/tocbot.css">
 <div class="pattern-center-blank"></div>
 
-  <div class="pattern-center single-center">
-    <!-- 有配图默认渲染第一张 -->
-    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200808012214.webp);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200808012214.webp">
-    </div>
-    <header class="pattern-header single-header">
-      <h1 class="entry-title">
-      字符串解构及扩展运算符展开字符串原理</h1>
-      <p class="entry-census">
-        <span>
-          <a href="blog.yione.club">
-            <img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/custom/avatar.jpg">
-          </a>
-        </span>
-        <span>
-          <a href="blog.yione.club">10000</a>
-        </span>
-        <span class="bull">
-        ·</span>
-        2020-8-7<span class="bull">
-        ·</span>
-      <span id="busuanzi_value_page_pv"></span>次阅读</p>
-    </header>
-  </div>
-
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
@@ -447,188 +423,15 @@
         <div class="toc"></div>
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
+          <header class="entry-header">
+            <h1 class="entry-title">let没有变量提升吗</h1>
+            <p class="entry-census">10000&nbsp;·&nbsp;2020-8-25&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
+
+            <hr>
+          </header>
+        
         <div class="entry-content">
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>朋友给我两行代码类似于下面：</p>
-<pre><code class="javascript">let [...arr] = &quot;123456&quot;;
-console.log(arr);</code></pre>
-<p>结果是输出一个数组</p>
-<p>字符串也能解构？</p>
-<p>并且问了我</p>
-<p><code>console.log(...&quot;123456&quot;);</code> </p>
-<p>将字符串变成了数组的原理是什么？</p>
-<p>听到第二个问题，感觉明显是错误的理解，于是，抱着打破砂锅问到底的精神去找了一下答案</p>
-<h2 id="字符串为什么能解构？"><a href="#字符串为什么能解构？" class="headerlink" title="字符串为什么能解构？"></a>字符串为什么能解构？</h2><p>MDN中说到：</p>
-<blockquote>
-<p>通过<strong>解构赋值,</strong> 可以将属性/值从对象/数组中取出,赋值给其他变量。</p>
-</blockquote>
-<p>也就是说解构有两种：</p>
-<h3 id="1-数组解构"><a href="#1-数组解构" class="headerlink" title="1.数组解构"></a>1.数组解构</h3><pre><code class="javascript">// 例一
-let [a, b, c] = [1, 2, 3];
-// 例二
-let [...arr] = [1, 2, 3];</code></pre>
-<p>例一是常规的数组解构，也可以像例二一样用剩余参数接收</p>
-<h3 id="2-对象解构"><a href="#2-对象解构" class="headerlink" title="2.对象解构"></a>2.对象解构</h3><pre><code class="javascript">// 例三
-let t = {name:&quot;0x2710&quot;};
-let {name} = t;
-console.log(name); // 0x2710</code></pre>
-<p>例三将在外部定义一个名字和对象内部一样的变量来接收对象解构的值</p>
-<h3 id="猜测与分析"><a href="#猜测与分析" class="headerlink" title="猜测与分析"></a>猜测与分析</h3><p>那么 <code>[...arr] = &quot;123456&quot;</code> 它是怎么解构字符串的呢？</p>
-<p>从格式上来说，是数组解构的格式，右边转换成了数组？</p>
-<p><strong>显然不是</strong> </p>
-<p>《JavaScript高级程序设计（第3版）》一书中 <strong>5.6 基本包装类型</strong> 说道</p>
-<blockquote>
-<p>每当读取一个基本类型值的时候，后台就会创建一个对应的基本包装类型的对象，从而让我们<br>能够调用一些方法来操作这些数据</p>
-</blockquote>
-<p>也就是说对字符串进行操作，操作过程中可以理解为将字符串转换为<strong>字符串对象</strong></p>
-<p>但是没有听说过会转换成数组的，而且解构中也完全没有此类说明，尽管字符串对象可以看成是<strong>伪数组</strong></p>
-<p>既然右边是对象那又是如何解构的呢？</p>
-<p>下面我们来看一个例子：</p>
-<pre><code class="javascript">let t = {
-      name:&quot;0x2710&quot;,
-      age: &quot;不告诉你&quot;
-    }
-let [...arr] = t;
-console.log(arr);</code></pre>
-<p>结果报错：**<code>Uncaught TypeError: t is not iterable</code>**</p>
-<p>什么意思呢，就是说t不可迭代</p>
-<p>那我们自定义一个迭代器好了</p>
-<pre><code class="javascript">let t = {
-  name:&quot;0x2710&quot;,
-  age: &quot;不告诉你&quot;,
-  [Symbol.iterator]() {
-    let keys = [];
-    for(let v in t) {
-      keys.push(v);
-    }
-    let index = 0;
-    return{
-      next: function() {
-        if(index &lt; keys.length) {
-          const res = {value: t[keys[index]], done: false}
-          index++;
-          return res;
-        } else {
-          return {value: undefined, done: true}
-        }
-      }
-    }
-  }
-}
-let [...arr] = t;
-console.log(arr);</code></pre>
-<p>输出：**<code>(2) [&quot;0x2710&quot;, &quot;不告诉你&quot;]</code>** (自定义迭代器看这里：<a href="/2020/08/21/迭代器和生成器/" title="迭代器和生成器">迭代器和生成器</a>)</p>
-<p><strong>也就是说使用 <code>[变量名]</code> 方式解构，右边的对象必须是可迭代的</strong></p>
-<p>验证：</p>
-<pre><code class="javascript">let str = new String(&quot;123&quot;);
-let arr = [1, 2, 3]
-console.dir(str.__proto__);
-console.dir(arr.__proto__);
-// 展开 String 和 Array并在里面找到：Symbol(Symbol.iterator): ƒ [Symbol.iterator]()</code></pre>
-<p>也就是说数组和字符串对象都可以迭代</p>
-<hr>
-<p>那使用 <code>{}</code> 解构数组会怎么样呢？</p>
-<pre><code class="javascript">let {...arr} = [1, 2, 3];
-console.log(arr);
-// 输出： {0: 1, 1: 2, 2: 3}</code></pre>
-<p>继续尝试解构自定义对象：</p>
-<pre><code class="javascript">let t = {
-  name:&quot;0x2710&quot;,
-  age: &quot;不告诉你&quot;
-}
-let {...arr} = t;
-console.log(arr);
-// 输出： {name: &quot;0x2710&quot;, age: &quot;不告诉你&quot;}</code></pre>
-<p>两种方式都能解构，这是为什么呢？</p>
-<p>实际上使用<strong>剩余参数</strong>接收<strong>解构对象</strong>是将对象<strong>枚举</strong>出来：</p>
-<pre><code class="javascript">let t = {};
-Object.defineProperty(t, &quot;name&quot;, {
-  value: &quot;0x2710&quot;,
-  enumerable: false
-});
-Object.defineProperty(t, &quot;age&quot;, {
-  value: &quot;不告诉你&quot;,
-  enumerable: false
-});
-let {...arr} = t;
-console.log(arr);
-// 输出：{}</code></pre>
-<p>那指定参数名呢？</p>
-<pre><code class="javascript">// 对象属性计算名和解构
-let key = &quot;0&quot;;
-let { [key]: _0 } = [1, 2, 3];
-console.log(_0); // 1
-
-let t = {
-  name:&quot;0x2710&quot;,
-  age: &quot;不告诉你&quot;
-}
-let {name} = t;
-console.log(name); // 0x2710
-
-let t = {};
-Object.defineProperty(t, &quot;name&quot;, {
-  value: &quot;0x2710&quot;,
-  enumerable: false
-});
-Object.defineProperty(t, &quot;age&quot;, {
-  value: &quot;不告诉你&quot;,
-  enumerable: false
-});
-let {name} = t;
-console.log(name); // 0x2710</code></pre>
-<p><strong>也就是说使用剩余参数接收( <code>{...arr}</code> ) 方式解构对象，右边的对象必须是可枚举的</strong></p>
-<p>指定属性名名则无限制</p>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><ol>
-<li>解构数组，右边的对象必须是可迭代的</li>
-<li>解构对象，若使用剩余参数接收，则右边的对象必须是可枚举的</li>
-<li>解构对象，若指定属性名，则在对象中直接查找该属性</li>
-</ol>
-<h2 id="扩展运算符展开字符串原理"><a href="#扩展运算符展开字符串原理" class="headerlink" title="扩展运算符展开字符串原理"></a>扩展运算符展开字符串原理</h2><p>扩展运算符为什么能展开字符串呢？</p>
-<p>看了上面字符串解构原理想必你心理已经有个答案了，但是呢我们还是来验证一下</p>
-<p>MDN展开语法说道：</p>
-<blockquote>
-<p><strong>展开语法(Spread syntax),</strong> 可以在函数调用/数组构造时, 将数组表达式或者string在语法层面展开；还可以在构造字面量对象时, 将对象表达式按key-value的方式展开。(<strong>译者注</strong>: 字面量一般指 <code>[1, 2, 3]</code> 或者 <code>{name: &quot;mdn&quot;}</code> 这种简洁的构造方式)</p>
-</blockquote>
-<h3 id="展开数组："><a href="#展开数组：" class="headerlink" title="展开数组："></a>展开数组：</h3><pre><code class="javascript">let arr = [1, 2, 3]
-console.log(...arr); // 1 2 3</code></pre>
-<h3 id="展开字符串："><a href="#展开字符串：" class="headerlink" title="展开字符串："></a>展开字符串：</h3><pre><code class="javascript">console.log(...&quot;123&quot;); // 1 2 3</code></pre>
-<p>同样，我认为这里只转换成字符串对象</p>
-<h3 id="展开自定义对象："><a href="#展开自定义对象：" class="headerlink" title="展开自定义对象："></a>展开自定义对象：</h3><pre><code class="javascript">let t = {
-  name:&quot;0x2710&quot;,
-  age: &quot;不告诉你&quot;
-}
-console.log(...t); // Uncaught TypeError: Found non-callable @@iterator</code></pre>
-<p>Found non-callable @@iterator ：发现不可调用的 @@iterator</p>
-<p><strong>@@iterator</strong>是个什么东西呢？MDN又说道：</p>
-<blockquote>
-<p><strong><code>[@@iterator]()</code></strong> 方法返回一个新的Iterator对象</p>
-</blockquote>
-<p>换句话说，也是没有迭代器，那我们把上面的迭代器搬过来好了：</p>
-<pre><code class="javascript">let t = {
-  name:&quot;0x2710&quot;,
-  age: &quot;不告诉你&quot;,
-  [Symbol.iterator]() {
-    let keys = [];
-    for(let v in t) {
-      keys.push(v);
-    }
-    let index = 0;
-    return{
-      next: function() {
-        if(index &lt; keys.length) {
-          const res = {value: t[keys[index]], done: false}
-          index++;
-          return res;
-        } else {
-          return {value: undefined, done: true}
-        }
-      }
-    }
-  }
-}
-console.log(...t); // 0x2710 不告诉你</code></pre>
-<h3 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h3><p>扩展运算符展开字符串，字符串先隐式转换成字符串对象，再进行迭代转换成 <code>值1, 值2, 值3</code> 这种形式</p>
-
+          
         </div>
         <!-- .entry-content -->
         <div class="single-reward">
@@ -656,36 +459,19 @@ console.log(...t); // 0x2710 不告诉你</code></pre>
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
-          
-            <div class="post-nepre half previous">
-          
-            <a href="/2020/08/14/VSCode修改默认HTML模板/" rel="prev">
-              <div class="background">
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200723105201.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200723105201.webp">
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                VSCode修改默认HTML模板</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
         
           
-            <div class="post-nepre half next">
+            <div class="post-nepre full next">
           
-            <a href="/2020/08/06/npm加速及设置全局安装位置/" rel="next">
+            <a href="/2020/08/21/迭代器和生成器/" rel="next">
               <div class="background">
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200807222229.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200807222229.webp">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200821172134.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/BlogImg/20200821172134.webp">
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                npm加速及设置全局安装位置</h3>
+                迭代器和生成器</h3>
                 <hr>
               </div>
             </a>
