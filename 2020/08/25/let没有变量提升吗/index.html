@@ -416,6 +416,30 @@
 <link rel="stylesheet" href="https://cdn.bootcss.com/tocbot/4.10.1/tocbot.css">
 <div class="pattern-center-blank"></div>
 
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/BlogImg/20200917105106.webp);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/BlogImg/20200917105106.webp">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      let没有变量提升吗</h1>
+      <p class="entry-census">
+        <span>
+          <a href="blog.yione.club">
+            <img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag/img/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="blog.yione.club">10000</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-8-25<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
@@ -423,15 +447,67 @@
         <div class="toc"></div>
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
-          <header class="entry-header">
-            <h1 class="entry-title">let没有变量提升吗</h1>
-            <p class="entry-census">10000&nbsp;·&nbsp;2020-8-25&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
-
-            <hr>
-          </header>
-        
         <div class="entry-content">
-          
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>前段时间，听朋友说let没有变量提升，对此我表示疑问，如果不存在变量提升那let的暂时性死区怎么解释？</p>
+<h2 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h2><h2 id="var-变量提升"><a href="#var-变量提升" class="headerlink" title="var 变量提升"></a>var 变量提升</h2><p>MDN上是这么解释的：</p>
+<blockquote>
+<p>从概念的字面意义上说，“变量提升”意味着变量和函数的声明会在物理层面移动到代码的最前面，但这么说并不准确。实际上变量和函数声明在代码里的位置是不会动的，而是在编译阶段被放入内存中。</p>
+<p>JavaScript 在执行任何代码段之前，将函数声明放入内存中的优点之一是，你可以在声明一个函数之前使用该函数</p>
+<p>函数和变量相比，会被优先提升。这意味着函数会被提升到更靠前的位置。</p>
+<h3 id="只有声明被提升"><a href="#只有声明被提升" class="headerlink" title="只有声明被提升"></a>只有声明被提升</h3><p><strong>JavaScript 仅提升声明，而不提升初始化</strong>。如果你先使用的变量，再声明并初始化它，变量的值将是 undefined</p>
+</blockquote>
+<p> 有趣的是，MDN上变量提升的例子里全是<code>var</code> 声明的；</p>
+<p>那么总结一下var的变量提升：</p>
+<p><strong>var 变量提升仅提升声明且有初始化值 <code>undefined</code></strong></p>
+<h2 id="let-变量提升"><a href="#let-变量提升" class="headerlink" title="let 变量提升"></a>let 变量提升</h2><p>我们知道，在使用let声明变量之前，使用变量会报错</p>
+<p>我们先看var的例子：</p>
+<pre><code class="javascript">var a = 1;
+function test() {
+  console.log(a);
+};
+test()
+// 输出：1</code></pre>
+<p>我们知道，在函数中使用函数内未定义的变量，会在上层作用域查找该变量，所以这里函数内可以访问函数外部的a</p>
+<p>那么我们再函数内加一条a的定义吧：</p>
+<pre><code class="javascript">var a = 1;
+function test() {
+  console.log(a);
+  var a = 2;
+};
+test()
+// 输出：undefined</code></pre>
+<p>输出结果符合上述 <code>var</code> 的变量提升</p>
+<p>那么我们把函数内部的<code>var</code>声明改为<code>let</code>声明：</p>
+<pre><code class="javascript">var a = 1;
+function test() {
+  console.log(a);
+  let a = 2;
+};
+test()
+// Uncaught ReferenceError: Cannot access &#39;a&#39; before initialization</code></pre>
+<p>唉？报错了，你可能觉得这不是很正常么？但是这却说明了问题</p>
+<p>首先报错的意思是：初始化前无法访问 a</p>
+<p><strong>假设let没有变量提升</strong>，按照变量查找原理，会找到函数外层的变量a并输出</p>
+<p><strong>假设let有var变量提升的行为</strong>，按照var变量提升的行为来说：</p>
+<ul>
+<li>声明提升， 这里满足了，因为这里检测到了函数内部的a定义</li>
+<li>声明后赋值 undefined，不满足，因为在这里错误提示变量未初始化</li>
+</ul>
+<p>但是上面<strong>两种假设都不成立</strong>，也就是说，let有变量提升，不过和var不同</p>
+<p>这里MDN中let的暂时性死区中解释到：</p>
+<blockquote>
+<h3 id="暂存死区"><a href="#暂存死区" class="headerlink" title="暂存死区"></a>暂存死区</h3><p>与通过  <code>var</code> 声明的有初始化值 <code>undefined</code> 的变量不同，通过 <code>let</code> 声明的变量直到它们的定义被执行时才初始化。在变量初始化前访问该变量会导致 <code>ReferenceError</code>。该变量处在一个自块顶部到初始化处理的“暂存死区”中</p>
+<h3 id="暂存死区与-typeof"><a href="#暂存死区与-typeof" class="headerlink" title="暂存死区与 typeof"></a>暂存死区与 <code>typeof</code></h3><p>与通过<code>var</code>声明的变量, 有初始化值 <code>undefined</code>和只是未声明的变量不同的是，如果使用<code>typeof</code>检测在暂存死区中的变量, 会抛出<code>ReferenceError</code>异常</p>
+</blockquote>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h3 id="var变量提升："><a href="#var变量提升：" class="headerlink" title="var变量提升："></a>var变量提升：</h3><ul>
+<li>声明提升</li>
+<li>声明后赋值 undefined</li>
+</ul>
+<h3 id="let变量提升"><a href="#let变量提升" class="headerlink" title="let变量提升"></a>let变量提升</h3><ul>
+<li>声明提升</li>
+<li>**声明后无赋值操作</li>
+</ul>
+
         </div>
         <!-- .entry-content -->
         <div class="single-reward">

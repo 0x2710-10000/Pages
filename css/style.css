@@ -2166,7 +2166,8 @@ h1.entry-title {
     vertical-align:sub
 }
 .entry-content p {
-    color:#797979
+    /* color:#797979 */
+    color:#454545
 }
 .entry-content p {
     line-height:30px
@@ -7838,9 +7839,9 @@ td.hljs-ln-numbers {
 
 /***********自己改的样式****************/
 /**********markdown表格样式修改***********/
-.entry-content th{
+/* .entry-content th{
     text-align: left;
-}
+} */
 /**********导航文字居中***********/
 .site-top .lower-cantiner {
     left: 0; 
@@ -7849,5 +7850,13 @@ td.hljs-ln-numbers {
 }
 .site-top .lower {
     left: 0%;
+}
+table td, table th {
+    padding: .3rem .6rem;
+    border: 1px solid lightgray;
+    vertical-align: middle;
+}
+code table td,code table th {
+    border: none;
 }
 /***********自己改的样式****************/
