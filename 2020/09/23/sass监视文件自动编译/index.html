@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">Tag: Git | 10000&#39;s blog</title>
+  <title itemprop="name">sass监视文件自动编译 | 10000&#39;s blog</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -412,64 +412,139 @@
   </div>
 </header>
 
-      
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/tocbot/4.10.1/tocbot.css">
 <div class="pattern-center-blank"></div>
-<div class="pattern-center ">
-  <div class="pattern-attachment-img">
-    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="Git.img" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/BlogImg/20200923171034.webp);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/BlogImg/20200923171034.webp">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      sass监视文件自动编译</h1>
+      <p class="entry-census">
+        <span>
+          <a href="blog.yione.club">
+            <img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="blog.yione.club">10000</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-9-23<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
   </div>
-  <header class="pattern-header ">
-    <h1 class="cat-title">Git</h1>
-  </header>
-</div>
+
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
-      
-  <!-- 首页默认取最最新文章集 -->
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/07/26/拉取github项目到本地进行开发/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天在学sass的时候朋友告诉我可以用 <code>node-sass</code> 使用 <code>node-sass sass文件路径 输出css文件路径 -w</code> 命令监视文件的变化自动编译文件，但是一直在全局环境下没成功安装上 <code>node-sass</code> 于是就想能不能用<code>npm</code>安装的<code>sass</code>直接监视文件变化，于是就找到了如下命令</p>
+<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>你已经通过<code>npm</code> 全局(或在项目中)安装好了 <code>sass</code></p>
+<h2 id="sass编译命令"><a href="#sass编译命令" class="headerlink" title="sass编译命令"></a>sass编译命令</h2><h4 id="sass编译一个文件："><a href="#sass编译一个文件：" class="headerlink" title="sass编译一个文件："></a>sass编译一个文件：</h4><p>命令：<code>sass 源scss文件路径:输出的css文件路径</code></p>
+<p>如：<code>sass main.scss:main.css</code></p>
+<h4 id="sass对一个文件进行监控编译"><a href="#sass对一个文件进行监控编译" class="headerlink" title="sass对一个文件进行监控编译"></a>sass对一个文件进行监控编译</h4><p>命令：<code>sass 源scss文件路径:输出的css文件路径 --watch</code></p>
+<p>如： <code>sass main.scss:main.css --watch</code></p>
+<p>sass将会监视mian.scss文件的变化并实时编译输出到指定位置的指定文件中</p>
+<h4 id="sass对文件夹进行监控编译"><a href="#sass对文件夹进行监控编译" class="headerlink" title="sass对文件夹进行监控编译"></a>sass对<strong>文件夹</strong>进行监控编译</h4><p>命令： <code>sass sass文件夹:css文件夹 --watch</code></p>
+<p>如：<code>sass ./sass:./css --watch</code></p>
+<p>sass将会监视当前目录下scss文件夹下的需要编译成css文件的scss文件并按照目录结构在css目录中生成相应的css文件</p>
+<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><p><strong>亲测编译scss文件时含有中文目录不会报错哦(npm sass 版本： <a href="mailto:&#x73;&#x61;&#x73;&#115;&#x40;&#49;&#46;&#x32;&#x36;&#46;&#49;&#x31;">&#x73;&#x61;&#x73;&#115;&#x40;&#49;&#46;&#x32;&#x36;&#46;&#49;&#x31;</a>)</strong></p>
+<p>可以在 <code>package.json</code> 中的 <code>scripts</code> 加入类似以下配置</p>
+<pre><code class="json">&quot;scripts&quot;: {
+  &quot;sass&quot;: &quot;sass ./scss:./css --watch&quot;
+}</code></pre>
+<p>随后可以在项目中运行<code>npm run sass</code>  以启动 sass 对文件或目录的监控</p>
+
         </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/BlogImg/20200726232844.webp" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/07/26/拉取github项目到本地进行开发/">
-    拉取github项目到本地进行开发</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-7-26</div>
-    <p>
-    </p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/07/26/拉取github项目到本地进行开发/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/custom/AliPay.jpg"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/custom/WeChatPay.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+        
+          
+            <div class="post-nepre full next">
+          
+            <a href="/2020/08/25/let没有变量提升吗/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/BlogImg/20200917105106.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/BlogImg/20200917105106.webp">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                let没有变量提升吗</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "eBI2VrTzWQqUDHdL2H3tHKVa-gzGzoHsz",
+        appKey: "xJU20pLKjcpPzw94uWscFv8z",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
 
-
-      <div class="clearer">
-      </div>
-    </main>
-    <!--  -->
-    
-  </div>
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="blog.yione.club" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/custom/avatar.jpg" itemprop="image" alt="10000" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="blog.yione.club" itemprop="url" rel="author">10000</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i></p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
+
+
+
     </div>    
     <div class="ins-search">
     <div class="ins-search-mask"></div>

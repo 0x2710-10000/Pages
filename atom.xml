@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2020-09-17T02:58:42.619Z</updated>
+  <updated>2020-09-23T09:10:57.210Z</updated>
   <id>/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>sass监视文件自动编译</title>
+    <link href="/2020/09/23/sass%E7%9B%91%E8%A7%86%E6%96%87%E4%BB%B6%E8%87%AA%E5%8A%A8%E7%BC%96%E8%AF%91/"/>
+    <id>/2020/09/23/sass监视文件自动编译/</id>
+    <published>2020-09-23T08:26:11.000Z</published>
+    <updated>2020-09-23T09:10:57.210Z</updated>
+    
+    <summary type="html">
+    
+      vscode 中使用 sass 自动编译 scss 文件
+    
+    </summary>
+    
+      <category term="笔记" scheme="/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>let没有变量提升吗</title>
@@ -57,9 +75,9 @@
       <category term="笔记" scheme="/categories/%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="JavaScript" scheme="/tags/JavaScript/"/>
-    
       <category term="ES6" scheme="/tags/ES6/"/>
+    
+      <category term="JavaScript" scheme="/tags/JavaScript/"/>
     
   </entry>
   
@@ -119,9 +137,9 @@
       <category term="笔记" scheme="/categories/%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="JavaScript" scheme="/tags/JavaScript/"/>
-    
       <category term="ES6" scheme="/tags/ES6/"/>
+    
+      <category term="JavaScript" scheme="/tags/JavaScript/"/>
     
   </entry>
   
