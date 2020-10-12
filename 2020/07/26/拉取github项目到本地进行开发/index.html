@@ -452,7 +452,7 @@
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>当你想在一个新文件夹中拉取github仓库中的代码并进行同步开发时可参照本教程</p>
 <h3 id="1-初始化本地仓库"><a href="#1-初始化本地仓库" class="headerlink" title="1.初始化本地仓库"></a>1.初始化本地仓库</h3><p>使用 <code>git init</code> 命令初始化一个空的本地仓库</p>
 <h3 id="2-关联远程仓库"><a href="#2-关联远程仓库" class="headerlink" title="2.关联远程仓库"></a>2.关联远程仓库</h3><p>使用 <code>git remote add [shortname] [url]</code> 来关联远程仓库</p>
-<p>如  git remote add origin <a href="mailto:&#103;&#105;&#x74;&#64;&#103;&#105;&#116;&#x68;&#x75;&#98;&#x2e;&#99;&#x6f;&#109;">&#103;&#105;&#x74;&#64;&#103;&#105;&#116;&#x68;&#x75;&#98;&#x2e;&#99;&#x6f;&#109;</a>:0x2710-10000/Pages.git</p>
+<p>如  git remote add origin <a href="mailto:&#103;&#x69;&#116;&#64;&#x67;&#105;&#116;&#104;&#117;&#x62;&#x2e;&#99;&#x6f;&#109;">&#103;&#x69;&#116;&#64;&#x67;&#105;&#116;&#104;&#117;&#x62;&#x2e;&#99;&#x6f;&#109;</a>:0x2710-10000/Pages.git</p>
 <p>其中 <code>shortname</code>用来指其后的仓库地址的简称</p>
 <p><code>url</code> 可以支持3种类型：(此处示例摘自<a href="https://www.runoob.com/git/git-create-repository.html" target="_blank" rel="noopener">菜鸟教程笔记</a>)</p>
 <pre><code>git@github.com:fsliurujie/test.git         --SSH协议
@@ -536,15 +536,45 @@ https://github.com/fsliurujie/test.git      --HTTPS协议</code></pre>
       
 <div id="vcomments"></div>
 <script>
-  window.onload = function(){
-      var valine = new Valine();
-      valine.init({
-        el: '#vcomments',
-        appId: "eBI2VrTzWQqUDHdL2H3tHKVa-gzGzoHsz",
-        appKey: "xJU20pLKjcpPzw94uWscFv8z",
-        path: window.location.pathname,
-        placeholder: "你是我一生只会遇见一次的惊喜 ..."
-      })
+  window.onload = function () {
+    var valine = new Valine();
+    valine.init({
+      el: '#vcomments',
+      appId: "eBI2VrTzWQqUDHdL2H3tHKVa-gzGzoHsz",
+      appKey: "xJU20pLKjcpPzw94uWscFv8z",
+      path: window.location.pathname,
+      placeholder: "你是我一生只会遇见一次的惊喜 ..."
+    })
+
+    // 以下给博客增加回复微信通知
+    var title1 = "text=博客又有新评论啦~！--by Valine"
+    var SCKEY_Server = "SCU117844Ta409dd804130c4ce5a8ec5ebf4aca53e5f83f7e76743a"
+    var ValineButton = document.getElementsByClassName("vsubmit vbtn")[0];
+    function send_valine_Server() {
+      var text = "desp=";
+      var pagename = document.title;
+      var wz = pagename.indexOf('|');
+      var res = pagename.substring(0, wz);
+      var pageurl = document.URL;
+      var ptime = new Date();
+      var vnick = document.getElementsByClassName("vnick vinput")[0].value;
+      var vmail = document.getElementsByClassName("vmail vinput")[0].value;
+      var vlink = document.getElementsByClassName("vlink vinput")[0].value;
+      var veditor = document.getElementsByClassName("veditor vinput")[0].value;
+      var data = text + `- 昵称：**${vnick}**
+- 邮箱：${vmail}
+- 个人网站：${vlink}
+- 当前页面：${res}
+- 评论内容：  **\`${veditor}\`  **
+- 跳转链接：${pageurl}
+- 评论时间：${ptime.toLocaleString()}`;
+      var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
+      httpRequest.open('POST', 'https://sc.ftqq.com/' + SCKEY_Server + '.send', true); //第二步：打开连接
+      httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
+      httpRequest.send(title1 + "&" + data);//发送请求 将请求体写在send中
+    };
+    ValineButton.onclick = send_valine_Server;
+
   }
 </script>
 

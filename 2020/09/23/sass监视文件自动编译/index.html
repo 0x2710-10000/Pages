@@ -458,7 +458,7 @@
 <h4 id="sass对文件夹进行监控编译"><a href="#sass对文件夹进行监控编译" class="headerlink" title="sass对文件夹进行监控编译"></a>sass对<strong>文件夹</strong>进行监控编译</h4><p>命令： <code>sass sass文件夹:css文件夹 --watch</code></p>
 <p>如：<code>sass ./sass:./css --watch</code></p>
 <p>sass将会监视当前目录下scss文件夹下的需要编译成css文件的scss文件并按照目录结构在css目录中生成相应的css文件</p>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><p><strong>亲测编译scss文件时含有中文目录不会报错哦(npm sass 版本： <a href="mailto:&#x73;&#97;&#x73;&#115;&#x40;&#49;&#46;&#50;&#x36;&#46;&#49;&#x31;">&#x73;&#97;&#x73;&#115;&#x40;&#49;&#46;&#50;&#x36;&#46;&#49;&#x31;</a>)</strong></p>
+<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><p><strong>亲测编译scss文件时含有中文目录不会报错哦(npm sass 版本： <a href="mailto:&#x73;&#97;&#x73;&#x73;&#64;&#49;&#46;&#x32;&#x36;&#x2e;&#x31;&#x31;">&#x73;&#97;&#x73;&#x73;&#64;&#49;&#46;&#x32;&#x36;&#x2e;&#x31;&#x31;</a>)</strong></p>
 <p>可以在 <code>package.json</code> 中的 <code>scripts</code> 加入类似以下配置</p>
 <pre><code class="json">&quot;scripts&quot;: {
   &quot;sass&quot;: &quot;sass ./scss:./css --watch&quot;
@@ -531,15 +531,45 @@
       
 <div id="vcomments"></div>
 <script>
-  window.onload = function(){
-      var valine = new Valine();
-      valine.init({
-        el: '#vcomments',
-        appId: "eBI2VrTzWQqUDHdL2H3tHKVa-gzGzoHsz",
-        appKey: "xJU20pLKjcpPzw94uWscFv8z",
-        path: window.location.pathname,
-        placeholder: "你是我一生只会遇见一次的惊喜 ..."
-      })
+  window.onload = function () {
+    var valine = new Valine();
+    valine.init({
+      el: '#vcomments',
+      appId: "eBI2VrTzWQqUDHdL2H3tHKVa-gzGzoHsz",
+      appKey: "xJU20pLKjcpPzw94uWscFv8z",
+      path: window.location.pathname,
+      placeholder: "你是我一生只会遇见一次的惊喜 ..."
+    })
+
+    // 以下给博客增加回复微信通知
+    var title1 = "text=博客又有新评论啦~！--by Valine"
+    var SCKEY_Server = "SCU117844Ta409dd804130c4ce5a8ec5ebf4aca53e5f83f7e76743a"
+    var ValineButton = document.getElementsByClassName("vsubmit vbtn")[0];
+    function send_valine_Server() {
+      var text = "desp=";
+      var pagename = document.title;
+      var wz = pagename.indexOf('|');
+      var res = pagename.substring(0, wz);
+      var pageurl = document.URL;
+      var ptime = new Date();
+      var vnick = document.getElementsByClassName("vnick vinput")[0].value;
+      var vmail = document.getElementsByClassName("vmail vinput")[0].value;
+      var vlink = document.getElementsByClassName("vlink vinput")[0].value;
+      var veditor = document.getElementsByClassName("veditor vinput")[0].value;
+      var data = text + `- 昵称：**${vnick}**
+- 邮箱：${vmail}
+- 个人网站：${vlink}
+- 当前页面：${res}
+- 评论内容：  **\`${veditor}\`  **
+- 跳转链接：${pageurl}
+- 评论时间：${ptime.toLocaleString()}`;
+      var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
+      httpRequest.open('POST', 'https://sc.ftqq.com/' + SCKEY_Server + '.send', true); //第二步：打开连接
+      httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
+      httpRequest.send(title1 + "&" + data);//发送请求 将请求体写在send中
+    };
+    ValineButton.onclick = send_valine_Server;
+
   }
 </script>
 
