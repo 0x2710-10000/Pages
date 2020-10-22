@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">10000&#39;s blog</title>
+  <title itemprop="name">立即执行函数内函数不可更改 | 10000&#39;s blog</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -412,205 +412,229 @@
   </div>
 </header>
 
-      <div class="blank" style="padding-top: 0px;"></div>
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/tocbot/4.10.1/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/BlogImg/20200808012214.webp);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/BlogImg/20200808012214.webp">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      立即执行函数内函数不可更改</h1>
+      <p class="entry-census">
+        <span>
+          <a href="https://blog.yione.club">
+            <img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="https://blog.yione.club">10000</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-10-22<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
 <div id="content" class="site-content">
-  
-  <div class="top-feature-row">
-  <h1 class="fes-title" style="font-family: 'Ubuntu', sans-serif;">
-  <i class="fa fa-anchor" aria-hidden="true">
-  </i>
-  START:DASH!!</h1>
-  
-</div>
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
-      <h1 class="main-title" style="font-family: 'Ubuntu', sans-serif;">
-      <i class="fa fa-envira" aria-hidden="true"></i>
-      Discovery</h1>
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天看到一道面试题如下：</p>
+<pre><code class="javascript">var a;
+(function a() {
+  a = 2
+  console.log(a);
+})()
+// 输出：
+ƒ a() {
+  a = 2
+  console.log(a);
+}</code></pre>
+<p>给出的解释是：</p>
+<blockquote>
+<p>首先，不存在变量提升和函数提升的问题，因为 (function (){}){} 是自执行函数，(function (){})是表达式；<br>这里的重点很明显是 a=2; 这行代码，<br>因为 {} 就是作用域，那么 a=2 执行的不是给全局变量 a 赋值为 2，<br>而是想要将自执行函数的name ‘a’, 更改为 2，<br>但这句话在 console.log 后证实未执行，即这句代码被忽略了。</p>
+</blockquote>
+<p>这个解释给我感觉可信度不高，因为这里重点确实是 <code>a = 2</code> 但是因为函数和变量重名问题导致此时并不会对外层变量进行操作，但是结果确实是被忽略了，没有执行，也说不上为什么，于是对此展开探究</p>
+<h2 id="立即执行函数话题的探究"><a href="#立即执行函数话题的探究" class="headerlink" title="立即执行函数话题的探究"></a>立即执行函数话题的探究</h2><h3 id="自身对照"><a href="#自身对照" class="headerlink" title="自身对照"></a>自身对照</h3><p>首先呢，我想到的是，在改变前后输出一次看看内容是否有区别：</p>
+<pre><code class="javascript">var a;
+(function a() {
+  console.log(a);
+  a = 2
+  console.log(a);
+})()
+// 输出：
+ƒ a() {
+  console.log(a);
+  a = 2
+  console.log(a);
+}
+ƒ a() {
+  console.log(a);
+  a = 2
+  console.log(a);
+}</code></pre>
+<p>从输出来看并无区别，至少这里证明了 <code>a = 2</code> 确实被忽略了，于是进行其他尝试：</p>
+<h3 id="对照试验"><a href="#对照试验" class="headerlink" title="对照试验"></a>对照试验</h3><p>想到一个办法：将立即执行函数改为函数调用来进行对比：</p>
+<p>由于前面 <code>var a;</code> 是障眼法，这里就去掉了</p>
+<pre><code class="javascript">function a(){
+  console.log(a);
+  a = 2
+  console.log(a);
+};
+a()
+//输出：
+ƒ a(){
+  console.log(a);
+  a = 2
+  console.log(a);
+}
+2</code></pre>
+<p><strong>结果不一样了！！！</strong></p>
+<p>从此可看出，立即执行函数和普通函数调用是有区别的，为什么这里不能改呢</p>
+<p>也没查到资料，问了朋友也解释不上来具体原因；</p>
+<p>后来问了一个老师，他的说法是：</p>
+<blockquote>
+<p>这是一种非常特殊的情况：立即执行函数中的a在它内部有效，而且禁止在函数内部修改。</p>
+<p>没有官方说明，这是通过程序得出的经验，开发中也用不到，也不提倡这样做，遇到了问题后大家开始寻找原因并得出这样一个结论</p>
+<p>还有一个办法：可以在严格模式下运行看看是否有报错</p>
+</blockquote>
+<p>这个说法并没有给我提供实质性的帮助，因为从结果就能看出，但是呢，网上也没找到资料，也算是有了个结果，并且提供了严格模式的思路(个人很少在严格模式下运行代码，确实是个不好的习惯)，严格模式对代码要求更严格，这时就抛出了一个错误：</p>
+<pre><code class="javascript">&#39;use strict&#39;
+var a;
+(function a() {
+  console.log(a);
+  a = 2
+  console.log(a);
+})()
+// 输出：
+ƒ a() {
+  console.log(a);
+  a = 2
+  console.log(a);
+}
+VM279:5 Uncaught TypeError: Assignment to constant variable.</code></pre>
+<p><strong>这个错误指向 <code>a = 2</code> 这里</strong></p>
+<p>大概意思是给常量赋值，也就是说这里的 <code>a</code> 是常量，这也是为什么非严格模式下无法更改的原因，静默失败在严格模式下升级为错误</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>立即执行函数中，函数定义为常量不可改变</strong></p>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/custom/AliPay.jpg"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/custom/WeChatPay.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+        
+          
+            <div class="post-nepre full next">
+          
+            <a href="/2020/10/12/数据劫持中闭包的应用/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/BlogImg/20200815163103.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/BlogImg/20200815163103.webp">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                数据劫持中闭包的应用</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
       
-  <!-- 首页默认取最最新文章集 -->
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
+<div id="vcomments"></div>
+<script>
+  window.onload = function () {
+    var valine = new Valine();
+    valine.init({
+      el: '#vcomments',
+      appId: "eBI2VrTzWQqUDHdL2H3tHKVa-gzGzoHsz",
+      appKey: "xJU20pLKjcpPzw94uWscFv8z",
+      path: window.location.pathname,
+      placeholder: "你是我一生只会遇见一次的惊喜 ..."
+    })
 
-  <div class="post-thumb">
-    <a href="/2020/07/27/盒子模型宽度计算规则/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/BlogImg20200722190926.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2020-7-27 11:07</div>
-      <a href="/2020/07/27/盒子模型宽度计算规则/" class="post-title">
-        <h3>盒子模型宽度计算规则</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/前端/">前端<em>·</em></a>
-          
-            <a href="/tags/CSS/">CSS<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/笔记/">笔记</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>盒子模型宽度计算二三事</p>
-        <div class="post-bottom">
-          <a href="/2020/07/27/盒子模型宽度计算规则/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
+    // 以下给博客增加回复微信通知
+    var title1 = "text=博客又有新评论啦~！--by Valine"
+    var SCKEY_Server = "SCU117844Ta409dd804130c4ce5a8ec5ebf4aca53e5f83f7e76743a"
+    var ValineButton = document.getElementsByClassName("vsubmit vbtn")[0];
+    function send_valine_Server() {
+      var text = "desp=";
+      var pagename = document.title;
+      var wz = pagename.indexOf('|');
+      var res = pagename.substring(0, wz);
+      var pageurl = document.URL;
+      var ptime = new Date();
+      var vnick = document.getElementsByClassName("vnick vinput")[0].value;
+      var vmail = document.getElementsByClassName("vmail vinput")[0].value;
+      var vlink = document.getElementsByClassName("vlink vinput")[0].value;
+      var veditor = document.getElementsByClassName("veditor vinput")[0].value;
+      var data = text + `- 昵称：**${vnick}**
+- 邮箱：${vmail}
+- 个人网站：${vlink}
+- 当前页面：${res}
+- 评论内容：  **\`${veditor}\`  **
+- 跳转链接：${pageurl}
+- 评论时间：${ptime.toLocaleString()}`;
+      var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
+      httpRequest.open('POST', 'https://sc.ftqq.com/' + SCKEY_Server + '.send', true); //第二步：打开连接
+      httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
+      httpRequest.send(title1 + "&" + data);//发送请求 将请求体写在send中
+    };
+    ValineButton.onclick = send_valine_Server;
+
+  }
+</script>
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="https://blog.yione.club" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/custom/avatar.jpg" itemprop="image" alt="10000" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="https://blog.yione.club" itemprop="url" rel="author">10000</a>
+            </h3>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2020/07/26/拉取github项目到本地进行开发/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/BlogImg/20200726232844.webp">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2020-7-26 22:07</div>
-      <a href="/2020/07/26/拉取github项目到本地进行开发/" class="post-title">
-        <h3>拉取github项目到本地进行开发</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/Git/">Git<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/教程/">教程</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p></p>
-        <div class="post-bottom">
-          <a href="/2020/07/26/拉取github项目到本地进行开发/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2020/07/22/display inline inlineblock block 的区别/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/BlogImg20200722190926.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2020-7-22 18:07</div>
-      <a href="/2020/07/22/display inline inlineblock block 的区别/" class="post-title">
-        <h3>Display inline, inline-block, block 的区别</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/前端/">前端<em>·</em></a>
-          
-            <a href="/tags/CSS/">CSS<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/笔记/">笔记</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>了解一下lnline lnline-block block之间的关系?</p>
-        <div class="post-bottom">
-          <a href="/2020/07/22/display inline inlineblock block 的区别/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2020/07/21/GithubPages自定义域名/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/BlogImg20200722071319.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2020-7-21 16:07</div>
-      <a href="/2020/07/21/GithubPages自定义域名/" class="post-title">
-        <h3>GitHub Pages 自定义域名</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/悦读/">悦读<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/教程/">教程</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>用自己的域名解析到Github博客页面</p>
-        <div class="post-bottom">
-          <a href="/2020/07/21/GithubPages自定义域名/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-
-
-    </main>
-      <!-- 首页默认取最最新文章集 -->
-    <!-- 
-      <nav class="navigator">
-        
-        <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-back"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-      </nav>
-     -->
-  </div>
-  
+        <hr>
+        <p><i class="iconfont icon-write"></i></p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
+
+
 
     </div>    
     <div class="ins-search">
