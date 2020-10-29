@@ -452,10 +452,11 @@
 <p>可以看到 <code>metrics-registry = &quot;https://registry.npmjs.org/&quot;</code> 也就是npm默认源地址</p>
 <p>如果你在国内，使用此源可能比较慢</p>
 <h3 id="永久更改npm源"><a href="#永久更改npm源" class="headerlink" title="永久更改npm源"></a>永久更改npm源</h3><p>可以使用 <code>npm set registry 源地址</code> 来永久更改npm源</p>
-<p>这里我们使用淘宝镜像 即：<code>npm config set registry https://registry.npm.taobao.org</code></p>
-<h3 id="临时使用国内源"><a href="#临时使用国内源" class="headerlink" title="临时使用国内源"></a>临时使用国内源</h3><p>可使用 <code>--registry=原地址</code> 来临时使用新的源地址，如：<code>npm install cnpm -g --registry=http://registry.npm.taobao.org</code> 会从淘宝镜像下载安装cnpm</p>
+<p>这里我们使用腾讯镜像 即：<code>npm config set registry http://mirrors.cloud.tencent.com/npm/</code></p>
+<h3 id="临时使用国内源"><a href="#临时使用国内源" class="headerlink" title="临时使用国内源"></a>临时使用国内源</h3><p>可使用 <code>--registry=原地址</code> 来临时使用新的源地址，如：<code>npm install cnpm -g --registry=http://mirrors.cloud.tencent.com/npm/</code> 会从腾讯镜像下载安装cnpm</p>
 <p>但是每次都要输入比较麻烦，建议永久更改为国内源</p>
-<h2 id="2-更改NPM全局安装位置及缓存位置"><a href="#2-更改NPM全局安装位置及缓存位置" class="headerlink" title="2.更改NPM全局安装位置及缓存位置"></a>2.更改NPM全局安装位置及缓存位置</h2><h3 id="更改位置"><a href="#更改位置" class="headerlink" title="更改位置"></a>更改位置</h3><p>同样使用 <code>npm config ls </code> 来查看当前配置</p>
+<h2 id="2-更改NPM全局安装位置及缓存位置"><a href="#2-更改NPM全局安装位置及缓存位置" class="headerlink" title="2.更改NPM全局安装位置及缓存位置"></a>2.更改NPM全局安装位置及缓存位置</h2><h3 id="更改位置"><a href="#更改位置" class="headerlink" title="更改位置"></a>更改位置</h3><p>由于博主系统盘空间较小，因此更改了全局安装包和缓存的位置：</p>
+<p>同样使用 <code>npm config ls </code> 来查看当前配置</p>
 <p>或者 </p>
 <ol>
 <li>使用 <code>npm get prefix</code> 查看全局安装位置</li>
@@ -475,7 +476,8 @@
 <p>此电脑(我的电脑) –&gt; 右键 –&gt; 属性  左侧找到高级系统设置  下方环境变量</p>
 <p>在系统变量中点击新建，填入变量名<code>NODE_PATH</code> 变量值为 <code>你的npm全局安装位置\node_modules</code></p>
 <p>保存之后重启你的编译器就可以导入全局安装的包了</p>
-<h4 id="添加npm环境变量"><a href="#添加npm环境变量" class="headerlink" title="添加npm环境变量"></a>添加npm环境变量</h4><p>此电脑(我的电脑) –&gt; 右键 –&gt; 属性  左侧找到高级系统设置  下方环境变量</p>
+<h4 id="添加全局软件包环境变量"><a href="#添加全局软件包环境变量" class="headerlink" title="添加全局软件包环境变量"></a>添加全局软件包环境变量</h4><p><strong>为了让你全局安装的包可以在任何地方使用，请务必执行以下步骤：</strong></p>
+<p>此电脑(我的电脑) –&gt; 右键 –&gt; 属性  左侧找到高级系统设置  下方环境变量</p>
 <p>系统变量</p>
 <p>​    新建</p>
 <p>​        变量名：<code>NPM_PREFIX</code></p>
@@ -486,6 +488,9 @@
 <p>用户变量</p>
 <p>​    如果发现Path中有安装时自动添加的之前的npm路径，可选择直接删除或者参照系统变量设置值</p>
 <p><strong>点击确定保存即可</strong></p>
+<h2 id="3-win10执行ps1脚本"><a href="#3-win10执行ps1脚本" class="headerlink" title="3.win10执行ps1脚本"></a>3.win10执行ps1脚本</h2><p>当你运行全局安装的软件包时可能会提示<strong>系统禁止运行脚本</strong>，更改执行策略即可：</p>
+<p>设置 –&gt; 更新和安全 –&gt; 开发者选项 –&gt; 下滑到PowerShell </p>
+<p><strong>将更改执行策略勾上</strong>即可</p>
 
         </div>
         <!-- .entry-content -->
