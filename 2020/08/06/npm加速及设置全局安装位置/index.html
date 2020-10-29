@@ -474,8 +474,10 @@
 </ol>
 <h3 id="更改环境变量"><a href="#更改环境变量" class="headerlink" title="更改环境变量"></a>更改环境变量</h3><h4 id="添加NODE-PATH"><a href="#添加NODE-PATH" class="headerlink" title="添加NODE_PATH"></a>添加NODE_PATH</h4><p><strong>为了能在项目中直接导入全局安装的包务必按照以下方法添加环境变量：</strong></p>
 <p>此电脑(我的电脑) –&gt; 右键 –&gt; 属性  左侧找到高级系统设置  下方环境变量</p>
+<p><img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/BlogImg/20201029113307.webp" alt="1"></p>
 <p>在系统变量中点击新建，填入变量名<code>NODE_PATH</code> 变量值为 <code>你的npm全局安装位置\node_modules</code></p>
-<p>保存之后重启你的编译器就可以导入全局安装的包了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/BlogImg/20201029113810.webp" alt="2"></p>
+<p><strong>保存之后重启你的编译器就可以导入全局安装的包了</strong></p>
 <h4 id="添加全局软件包环境变量"><a href="#添加全局软件包环境变量" class="headerlink" title="添加全局软件包环境变量"></a>添加全局软件包环境变量</h4><p><strong>为了让你全局安装的包可以在任何地方使用，请务必执行以下步骤：</strong></p>
 <p>此电脑(我的电脑) –&gt; 右键 –&gt; 属性  左侧找到高级系统设置  下方环境变量</p>
 <p>系统变量</p>
@@ -485,12 +487,14 @@
 <p>​    更改Path</p>
 <p>​        win7用户在后面追加  <code>;%NPM_PREFIX%</code></p>
 <p>​        win10用户直接新建写入  <code>%NPM_PREFIX%</code></p>
-<p>用户变量</p>
+<p><img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/BlogImg/20201029115049.webp" alt="3"></p>
+<p>用户变量(可以不管)</p>
 <p>​    如果发现Path中有安装时自动添加的之前的npm路径，可选择直接删除或者参照系统变量设置值</p>
 <p><strong>点击确定保存即可</strong></p>
 <h2 id="3-win10执行ps1脚本"><a href="#3-win10执行ps1脚本" class="headerlink" title="3.win10执行ps1脚本"></a>3.win10执行ps1脚本</h2><p>当你运行全局安装的软件包时可能会提示<strong>系统禁止运行脚本</strong>，更改执行策略即可：</p>
 <p>设置 –&gt; 更新和安全 –&gt; 开发者选项 –&gt; 下滑到PowerShell </p>
 <p><strong>将更改执行策略勾上</strong>即可</p>
+<p><img src="https://cdn.jsdelivr.net/gh/0x2710-10000/ImageBag@master/img/BlogImg/20201029115748.webp" alt="4"></p>
 
         </div>
         <!-- .entry-content -->
